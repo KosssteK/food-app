@@ -1,17 +1,16 @@
 import classes from './Element.module.css';
+import {getCategoryStyle} from '../../enums/Enums';
+import addImg from '../../../img/add_circle.png';
+import removeImg from '../../../img/remove_circle.png';
 
 const Element =(props)=>{
-    const buttonClasses = [classes.button]; 
-    if(props.add){
-        buttonClasses.push(classes.add);
-    }else{
-        buttonClasses.push(classes.sub);
-    }
+    const buttonClasses = [classes.button];
+    console.log(buttonClasses);
 
-    return <div className={classes.item} key={props.id}>
+    return <div className={[classes.item,getCategoryStyle(props.category)].join(' ')} key={props.id}>
         <span className={classes.name}>{props.name}</span>
         {props.qty ? <span className={classes.qty}>{props.qty}</span> : null}
-        <button className={buttonClasses.join(' ')} onClick={()=>props.click(props.id)}>{props.add ? '+' : '-'}</button>
+        <button className={buttonClasses.join(' ')} onClick={()=>props.click(props.id)}>{props.add ? <img src={addImg} alt='img'/> : <img src={removeImg} alt='img'/> }</button>
     </div>
 }
 

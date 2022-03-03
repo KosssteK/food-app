@@ -8,6 +8,7 @@ const Cart = (props)=>{
         name={el.name} 
         click={props.removeProduct}
         qty={el.qty}
+        category={el.category}
         add={false}
     />);
     return <div>

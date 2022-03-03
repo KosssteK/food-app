@@ -1,0 +1,25 @@
+.productForm{
+    display: inline-grid;
+}
+
+.button{
+    margin: 20px 0;
+    flex-wrap: wrap;
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: #008fd1;
+    color: white;
+    display: flex;
+    padding: 5px 10px;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.inputs{
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid black;
+}

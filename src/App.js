@@ -1,12 +1,14 @@
 import './App.css';
 import {useState, useEffect} from 'react';
+import {MenuEnum} from './components/enums/Enums';
 import NavBar from './components/header/NavBar';
 import ProductList from './components/lists/ProductList';
+import AddProduct from './components/lists/AddProduct';
 import Cart from './components/lists/Cart';
 
 function App() {
 
-  const [showCart, setShowCart] = useState(true);
+  const [showCart, setShowCart] = useState(MenuEnum.CART);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 
@@ -16,14 +18,8 @@ function App() {
       return response.json();
     })
     .then(data =>{
-
-      let loadedProducts = [];
-
-      for(const key in data){
-        loadedProducts = [...data[key]];
-      }
-
-      setProducts([...loadedProducts]);
+      console.log(data);
+      setProducts([...data]);
     })
     .catch(err => console.log(err));
   },[]);
@@ -52,6 +48,23 @@ function App() {
        console.log(response);
      });
   }
+
+  const updateProducts = newProduct => {
+    if(products.indexOf(el => el.name === newProduct.name) === -1){
+
+      const newProducts = [...products, newProduct];
+
+      fetch('https://food-b922a-default-rtdb.firebaseio.com/products.json', {
+        method: 'PUT',
+        body: JSON.stringify([...newProducts]),
+         headers:{
+         'Content-Type': 'application/json'
+        }
+     }).then(response =>{
+       console.log(response);
+     });
+    }
+}
 
   const addProductToCartHandler = (id)=>{
     const newState = [...cart];
@@ -86,13 +99,14 @@ function App() {
     <div className="App">
       <NavBar showCart={showCart} setShowCart={setShowCart}/>
       <div className="empty"></div>
-      {showCart ? 
-      <Cart 
+      {showCart === MenuEnum.ADD && <AddProduct updateProducts={updateProducts}/> }
+      {showCart === MenuEnum.CART && <Cart 
         cart={cart}  
-        removeProduct={removeProductFromCartHandler} /> :
-      <ProductList 
+        removeProduct={removeProductFromCartHandler} /> }
+      {showCart === MenuEnum.PRODUCTS && <ProductList 
         products={products} 
         addProduct={addProductToCartHandler} />}
+     
     </div>
   ); 
 }
