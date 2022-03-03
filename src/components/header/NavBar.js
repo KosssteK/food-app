@@ -1,21 +1,59 @@
-import {Fragment} from 'react';
+import { Fragment, useState } from "react";
 
-import cartImg from '../../img/cart1.png';
-import listImg from '../../img/list.png';
-import addImg from '../../img/add_box.png';
-import {MenuEnum} from '../enums/Enums';
+import cartImg from "../../img/cart1.png";
+import listImg from "../../img/list.png";
+import addImg from "../../img/add_box.png";
+import { MenuEnum } from "../enums/Enums";
 
-import ListButton from './ListButton';
-import classes from './NavBar.module.css';
+import ListButton from "./ListButton";
+import classes from "./NavBar.module.css";
 
-const NavBar = (props)=>{
-    return <Fragment>
-        <header className={classes.header}>
-            <ListButton click={()=>{props.setShowCart(MenuEnum.ADD)}}><img src={addImg} alt='img'/></ListButton>
-            <ListButton click={()=>{props.setShowCart(MenuEnum.PRODUCTS)}}><img src={listImg} alt='img'/></ListButton>
-            <ListButton click={()=>{props.setShowCart(MenuEnum.CART)}}><img src={cartImg} alt='img'/></ListButton>
+const NavBar = (props) => {
+  const [inputValue, setInputValue] = useState("");
+
+  return (
+    <div className={classes.header}>
+      <div>
+        <header className={classes.controls}>
+          <ListButton
+            click={() => {
+              setInputValue("");
+              props.setShowPage(MenuEnum.ADD);
+            }}
+          >
+            <img src={addImg} alt="img" />
+          </ListButton>
+          <ListButton
+            click={() => {
+              setInputValue("");
+              props.setShowPage(MenuEnum.PRODUCTS);
+            }}
+          >
+            <img src={listImg} alt="img" />
+          </ListButton>
+          <ListButton
+            click={() => {
+              setInputValue("");
+              props.setShowPage(MenuEnum.CART);
+            }}
+          >
+            <img src={cartImg} alt="img" />
+          </ListButton>
         </header>
-    </Fragment>
-}
+      </div>
+      {props.showPage === MenuEnum.PRODUCTS ? (
+        <input
+          className={classes.search}
+          placeholder="Szukaj..."
+          onChange={(event) => {
+            setInputValue(event.target.value);
+            props.filter(event);
+          }}
+          value={inputValue}
+        />
+      ) : null}
+    </div>
+  );
+};
 
 export default NavBar;

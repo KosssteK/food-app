@@ -37,7 +37,21 @@
   }
 }
 
-.empty{
+.empty {
   width: 100%;
   height: 5rem;
+}
+
+input {
+  color: black;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
+select {
+  color: black;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid black;
 }
