@@ -4,7 +4,6 @@ import { MenuEnum } from "./components/enums/Enums";
 import NavBar from "./components/header/NavBar";
 import ProductList from "./components/lists/ProductList";
 import AddProduct from "./components/lists/AddProduct";
-import Cart from "./components/lists/Cart";
 
 function App() {
   const [showPage, setShowPage] = useState(MenuEnum.CART);
@@ -80,6 +79,7 @@ function App() {
         return 0;
       });
       setProducts([...newProducts]);
+      setFilteredProducts([...newProducts]);
 
       fetch("https://food-b922a-default-rtdb.firebaseio.com/products.json", {
         method: "PUT",
@@ -155,12 +155,15 @@ function App() {
         <AddProduct updateProducts={updateProducts} />
       )}
       {showPage === MenuEnum.CART && (
-        <Cart cart={cart} removeProduct={removeProductFromCartHandler} />
+        <ProductList
+          products={cart}
+          clickAction={removeProductFromCartHandler}
+        />
       )}
       {showPage === MenuEnum.PRODUCTS && (
         <ProductList
           products={filteredProducts}
-          addProduct={addProductToCartHandler}
+          clickAction={addProductToCartHandler}
         />
       )}
     </div>

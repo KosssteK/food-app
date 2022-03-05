@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 import cartImg from "../../img/cart1.png";
 import listImg from "../../img/list.png";

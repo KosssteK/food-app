@@ -1,4 +1,6 @@
 .item {
+  width: 80%;
+  margin: 5px auto;
   display: flex;
   color: black;
   border: 1px solid #222;
@@ -11,6 +13,7 @@
 }
 
 .name {
+  text-align: left;
   width: 90%;
   margin: auto;
   font-weight: bold;
