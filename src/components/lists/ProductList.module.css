@@ -23,6 +23,11 @@
   background-image: linear-gradient(to right, #85d8ff, #1093ff);
 }
 
+.dry {
+  /* background-color: #79c4e7; */
+  background-image: linear-gradient(to right, #ff85c2, #ff46c1);
+}
+
 .category {
   margin: 0;
   background-color: lightgrey;

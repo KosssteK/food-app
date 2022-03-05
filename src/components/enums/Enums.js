@@ -10,6 +10,7 @@ export const Categories = {
   BAKERY: "pieczywo",
   VEGETABLES: "warzywa/owoce",
   MEAT: "mieso",
+  DRY: "suche",
   DAIRY: "nabial",
   CHEMISTRY: "srajka",
 };
@@ -26,6 +27,8 @@ export const getCategoryStyle = (category) => {
       return classes.dairy;
     case Categories.CHEMISTRY:
       return classes.chemistry;
+    case Categories.DRY:
+      return classes.dry;
     default:
       return classes.chemistry;
   }
