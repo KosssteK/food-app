@@ -8,6 +8,15 @@ const ProductList = (props) => {
   for (const key in Categories) {
     const categoryContent = props.products
       .filter((el) => el.category === Categories[key])
+      .sort((a, b) => {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return a.name > b.name;
+      })
       .map((el, index) => (
         <Element
           key={index}

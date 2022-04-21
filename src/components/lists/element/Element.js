@@ -15,7 +15,9 @@ const Element = (props) => {
       {props.qty ? <span className={classes.qty}>{props.qty}</span> : null}
       <button
         className={buttonClasses.join(" ")}
-        onClick={() => props.click(props.id)}
+        onClick={() => {
+          props.click(props.id);
+        }}
       >
         {props.add ? (
           <img src={addImg} alt="img" />
